@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Navbar from "../components/Navbar"; // Update the path if needed
 
 const HealthRecordRegistration = () => {
@@ -16,9 +16,35 @@ const HealthRecordRegistration = () => {
     });
   };
 
-  const handleAddDoc = () => {
-    console.log(formData);
-    // Later: send data to Flask backend
+  const handleAddDoc = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/add-health-record", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Document added successfully!");
+
+        // Clear form fields
+        setFormData({
+          hospital: "",
+          doctor: "",
+          specialist: "",
+          healthIssue: "",
+        });
+      } else {
+        alert(data.message || "Failed to add document");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Server error");
+    }
   };
 
   return (
@@ -96,11 +122,17 @@ const HealthRecordRegistration = () => {
 
           <div className="d-flex justify-content-end mt-4">
             <button
-              className="btn btn-outline-secondary rounded-pill px-4"
-              onClick={handleAddDoc}
-            >
-              Add Doc +
-            </button>
+            className="btn btn-outline-secondary rounded-pill px-4"
+            onClick={handleAddDoc}
+            disabled={
+              !formData.hospital ||
+              !formData.doctor ||
+              !formData.specialist ||
+              !formData.healthIssue
+            }
+          >
+            Add Doc +
+          </button>
           </div>
         </div>
       </div>

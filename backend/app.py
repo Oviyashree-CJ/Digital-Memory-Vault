@@ -52,6 +52,27 @@ def login():
         "message": "Invalid Credentials"
     }), 401
 
+@app.route('/add-health-record', methods=['POST'])
+def add_health_record():
+    data = request.get_json()
+
+    hospital = data.get('hospital')
+    doctor = data.get('doctor')
+    specialist = data.get('specialist')
+    health_issue = data.get('healthIssue')
+
+    print({
+        "hospital": hospital,
+        "doctor": doctor,
+        "specialist": specialist,
+        "healthIssue": health_issue
+    })
+
+    # Save to database here
+
+    return jsonify({
+        "message": "Health record added successfully"
+    }), 201
 
 if __name__ == "__main__":
     app.run(debug=True)
