@@ -8,6 +8,7 @@ import HomePage from "./pages/home";
 import HealthRecord from "./pages/healthrecord";
 import PrescriptionPage from "./pages/prescription";
 import HealthRecordRegistration from "./pages/HealthRecordRegistration";
+import MedicineDetails from "./pages/MedicineDetails";
 
 function App() {
   return (
@@ -22,7 +23,11 @@ function App() {
         <Route path="/health-record" element={<HealthRecord />} />
         <Route path="/prescription" element={<PrescriptionPage />} />
         <Route path="/health-record-registration" element={<HealthRecordRegistration />} />
-
+        <Route path="/prescription" element={<Prescription />} />
+        <Route
+          path="/medicine-details/:id"
+          element={<MedicineDetails />}
+        />
       </Routes>
     </BrowserRouter>
   );
