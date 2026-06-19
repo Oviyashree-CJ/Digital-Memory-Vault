@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import AuthChoice from "./pages/auth";
 import HomePage from "./pages/home";
+import HealthRecord from "./pages/healthrecord";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<HomePage />} />
+        <Route path="/health-record" element={<HealthRecord />} />
 
       </Routes>
     </BrowserRouter>
